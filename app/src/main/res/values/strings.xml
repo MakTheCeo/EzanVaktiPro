@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SG Prayer Times</string>
+    <string name="app_version">App version 3.0</string>
+
+    <string name="permission_denied_explanation">
+        Permission was denied, but is needed for app to function.
+    </string>
+
+    <string name="share_app">Share this app with others</string>
+    <string name="rate_app">Give this app an excellent rating</string>
+    <string name="view_github">View source code on Github</string>
+    <string name="credits">Credits &amp; Attributions</string>
+    <string name="bottom_credits">Prayer Times provided by <b>MUIS</b></string>
+
+    <string name="settings">Settings</string>
+
+    <string name="error_network">Failed to fetch data from the server.\nPlease check your network connection.</string>
+    <string name="error_date">Date not found in database.\nPlease check your time &amp; date settings.</string>
+
+    <string name="loading_info">Loading…Make sure location is <b>turned on</b></string>
+    <string name="compass_unsupprted_message">Your device is currently not supported!</string>
+</resources>

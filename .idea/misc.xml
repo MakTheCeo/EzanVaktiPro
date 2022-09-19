@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg2.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg5.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_arrow_back.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_compass.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_launcher_background.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_refresh.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_share.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/font/qs_regular.xml" value="0.3536458333333333" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/activity_main.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/dialog_mosque_details.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/frag_bottomsheet_menu.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_prayertimes.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_qibla.xml" value="0.27314814814814814" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_recyclerview.xml" value="0.21203703703703702" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_calendar_data.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_mosque_data.xml" value="0.45" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_prayer_times.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/progress_layout.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/toolbar.xml" value="0.375" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewstub_prayertimes_large.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewstub_prayertimes_small.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewstub_widget_loading.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewtub_widget_header.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewtub_widget_header_small.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/widget_prayer_times_large.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/widget_prayer_times_small.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/menu/bottom_menu.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/menu/main_menu.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
