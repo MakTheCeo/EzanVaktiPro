@@ -3,25 +3,48 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg1.xml" value="0.336" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg2.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg3.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg4.xml" value="0.336" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/abg5.xml" value="0.236" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/bg_bottom_sheet.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/dialog_bg.xml" value="0.336" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_arrow_back.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_calendar.xml" value="0.336" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_compass.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_credits.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_dehaze.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_directions.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_facebook.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_github.xml" value="0.336" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_launcher_background.xml" value="0.236" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_refresh.xml" value="0.236" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_share.xml" value="0.236" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_thumb_up.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/ic_wcfriendly.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/just_aesthetics.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/launch_screen.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/drawable/widget_small_bg.xml" value="0.336" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/font/qs_bold.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/font/qs_light.xml" value="0.19114583333333332" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/font/qs_medium.xml" value="0.19114583333333332" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/font/qs_regular.xml" value="0.3536458333333333" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/activity_main.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/dialog_mosque_details.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/frag_bottomsheet_menu.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_calender.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_compass.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_prayers.xml" value="0.31145833333333334" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_prayertimes.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_qibla.xml" value="0.27314814814814814" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/fragment_recyclerview.xml" value="0.21203703703703702" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_calendar_data.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_mosque_data.xml" value="0.45" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/item_prayer_times.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/nav_menu.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/progress_layout.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/toolbar.xml" value="0.375" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/viewstub_prayertimes_large.xml" value="0.3296875" />
@@ -33,6 +56,7 @@
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/layout/widget_prayer_times_small.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/menu/bottom_menu.xml" value="0.3296875" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/menu/main_menu.xml" value="0.3296875" />
+        <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/menu/nav_menu.xml" value="0.247265625" />
         <entry key="..\:/Users/makth/StudioProjects/NamazVakitleri/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.336" />
       </map>
     </option>

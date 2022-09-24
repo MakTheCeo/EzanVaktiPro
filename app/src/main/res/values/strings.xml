@@ -1,5 +1,6 @@
+
 <resources>
-    <string name="app_name">SG Prayer Times</string>
+    <string name="app_name">Namaz Vakitleri</string>
     <string name="app_version">App version 3.0</string>
 
     <string name="permission_denied_explanation">
@@ -19,4 +20,6 @@
 
     <string name="loading_info">Loading…Make sure location is <b>turned on</b></string>
     <string name="compass_unsupprted_message">Your device is currently not supported!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
