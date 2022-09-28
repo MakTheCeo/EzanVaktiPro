@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="3dp">
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="4"
+        android:text="Tarih"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/fajr"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/sunrise"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/dhuhr"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/asr"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/maghreb"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        style="@style/prayerTableTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3sp"
+        android:layout_weight="1"
+        android:text="@string/ishaa"
+        android:textSize="15sp" />
+</LinearLayout>
