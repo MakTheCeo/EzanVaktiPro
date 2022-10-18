@@ -14,5 +14,6 @@
     <dimen name="button_width">170dp</dimen>
 
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="prayers_textsize">22sp</dimen>
 
 </resources>
