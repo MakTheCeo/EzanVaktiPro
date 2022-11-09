@@ -1,8 +1,11 @@
-package com.alkhatib.namazvakitleri
+package com.alkhatib.namazvakitleri.RetrofitApi
 
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
+@Entity(tableName = "prayers")
 data class  PrayersData (
 
     @SerializedName("Aksam"                  ) var Aksam                  : String? = null,
@@ -11,7 +14,8 @@ data class  PrayersData (
     @SerializedName("Ikindi"                 ) var Ikindi                 : String? = null,
     @SerializedName("Imsak"                  ) var Imsak                  : String? = null,
     @SerializedName("KibleSaati"             ) var KibleSaati             : String? = null,
-    @SerializedName("MiladiTarihUzun"        ) var MiladiTarihUzun        : String? = null,
+   @PrimaryKey
+     @SerializedName("MiladiTarihUzun"        ) var MiladiTarihUzun        : String,
     @SerializedName("Ogle"                   ) var Ogle                   : String? = null,
     @SerializedName("Yatsi"                  ) var Yatsi                  : String? = null
     )

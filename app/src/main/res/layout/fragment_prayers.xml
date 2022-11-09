@@ -5,20 +5,19 @@
     android:id="@+id/prayersconstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrayersFragment">
+    tools:context=".Fragments.PrayersFragment">
 
 
     <TextView
         android:id="@+id/locationAndDateContainerTv"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="120dp"
         android:layout_marginHorizontal="25dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/prayer_background_red"
-        app:layout_constraintBottom_toTopOf="@+id/nextPrayerContainerTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.739" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/hijriTV"
@@ -26,14 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:text="05/1446"
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/locationAndDateContainerTv"
         app:layout_constraintEnd_toEndOf="@+id/locationAndDateContainerTv"
         app:layout_constraintTop_toBottomOf="@+id/locationTv"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.763" />
 
     <TextView
         android:id="@+id/dayTv"
@@ -47,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/locationAndDateContainerTv"
         app:layout_constraintStart_toStartOf="@+id/locationAndDateContainerTv"
         app:layout_constraintTop_toTopOf="@+id/locationAndDateContainerTv"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/monthWeekTv"
@@ -57,11 +56,11 @@
         android:layout_marginTop="8dp"
         android:text="Eylül,Salı"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="@+id/locationAndDateContainerTv"
         app:layout_constraintStart_toEndOf="@+id/dayTv"
         app:layout_constraintTop_toBottomOf="@+id/locationTv"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintVertical_bias="0.808" />
 
     <TextView
         android:id="@+id/locationTv"
@@ -71,7 +70,7 @@
         android:layout_marginEnd="8dp"
         android:text="Ankara,Çankaya"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/locationAndDateContainerTv"
         app:layout_constraintTop_toTopOf="@+id/locationAndDateContainerTv" />
 
@@ -80,27 +79,23 @@
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/prayer_background_red"
-        app:layout_constraintBottom_toTopOf="@+id/prayersTable"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/locationAndDateContainerTv" />
 
     <TextView
         android:id="@+id/timeLeftForNextPrayerTv"
         style="@style/prayerTableTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
         android:text="01:43:25"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/nextPrayerContainerTv"
-        app:layout_constraintEnd_toStartOf="@+id/nextPrayerIv"
-        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="@+id/nextPrayerContainerTv" />
 
     <TextView
@@ -119,27 +114,26 @@
 
     <TableLayout
         android:id="@+id/prayersTable"
-        android:layout_width="match_parent"
+        android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/nextPrayerContainerTv">
 
         <TableRow
             android:id="@+id/TitlesTR"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/prayer_background_blue"
             android:textAlignment="center"
             android:weightSum="1">
 
             <TextView
                 android:id="@+id/namazTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:layout_weight="0.35"
@@ -151,7 +145,7 @@
 
             <TextView
                 android:id="@+id/timeTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:layout_weight="0.4"
@@ -163,7 +157,7 @@
 
             <TextView
                 android:id="@+id/notificationTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="3dp"
                 android:layout_weight="0.25"
@@ -177,30 +171,29 @@
 
         <TableRow
             android:id="@+id/fajrTR"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/white"
             android:weightSum="1">
 
             <TextView
                 android:id="@+id/prayer1"
 
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/fajr"
-                style="@style/prayerTableTheme"
                 android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit1"
                 style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                />
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <ImageView
@@ -222,21 +215,21 @@
 
             <TextView
                 android:id="@+id/prayer2"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/sunrise"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit2"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <ImageView
@@ -258,25 +251,25 @@
 
             <TextView
                 android:id="@+id/prayer3"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/dhuhr"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit3"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <ImageView
-                android:id="@+id/notification3"
+                android:id="@+id/compassIV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -294,21 +287,21 @@
 
             <TextView
                 android:id="@+id/prayer4"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/asr"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit4"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
             <ImageView
                 android:id="@+id/notification4"
@@ -329,21 +322,21 @@
 
             <TextView
                 android:id="@+id/prayer5"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/maghreb"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit5"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
             <ImageView
                 android:id="@+id/notification5"
@@ -364,22 +357,21 @@
 
             <TextView
                 android:id="@+id/prayer6"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_weight="0.35"
                 android:text="@string/ishaa"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"
-                />
+                android:textSize="@dimen/prayers_textsize" />
 
 
             <TextView
                 android:id="@+id/vakit6"
+                style="@style/prayerTableTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:text="@string/prayer_default"
-                style="@style/prayerTableTheme"
-                android:textSize="@dimen/prayers_textsize"/>
+                android:textSize="@dimen/prayers_textsize" />
 
             <ImageView
                 android:id="@+id/notification6"
@@ -397,11 +389,11 @@
         android:id="@+id/nextPrayerIv"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginEnd="24dp"
         android:src="@drawable/prayer2_white"
         app:layout_constraintBottom_toBottomOf="@+id/nextPrayerContainerTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
-        app:layout_constraintStart_toEndOf="@+id/nextPrayerTv"
-        app:layout_constraintTop_toTopOf="@+id/nextPrayerContainerTv" />
+        app:layout_constraintEnd_toEndOf="@+id/nextPrayerContainerTv"
+        app:layout_constraintTop_toTopOf="@+id/nextPrayerContainerTv"
+        app:layout_constraintVertical_bias="0.583" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

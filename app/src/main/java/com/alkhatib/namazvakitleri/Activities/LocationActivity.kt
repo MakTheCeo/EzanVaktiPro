@@ -1,7 +1,7 @@
-package com.alkhatib.namazvakitleri
+package com.alkhatib.namazvakitleri.Activities
 
-import android.R
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -9,29 +9,27 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.alkhatib.namazvakitleri.RetrofitApi.City
+import com.alkhatib.namazvakitleri.RetrofitApi.District
+import com.alkhatib.namazvakitleri.RetrofitApi.RetrofitAPI
 import com.alkhatib.namazvakitleri.databinding.ActivityLocationBinding
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
+import java.lang.Boolean
 
 
 class LocationActivity : AppCompatActivity() {
     val website = "https://ezanvakti.herokuapp.com/"
 
     // TODO (STEP 1: Add a variable for SharedPreferences)
-    // START
-    // A global variable for the SharedPreferences
     private lateinit var mSharedPreferences: SharedPreferences
 
-    // END
     // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
-    // START Note: add it to constants object
     val PREFERENCE_NAME = "LocationPreference"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //data binding
@@ -39,44 +37,66 @@ class LocationActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // TODO (STEP 3: Initialize the SharedPreferences variable.)
-        // START
-        // Initialize the SharedPreferences variable
         mSharedPreferences =
             this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-        // END
 
-
-        // on below line we are creating a method
-        // to get data from api using retrofit.
+        // get data from api using retrofit.
         getCity(binding, this)
 
-
+        //switch to main activity from now on.
+        binding.nextBtn.setOnClickListener {
+            moveToMain()
         }
+    }
 
+    //was it started before as location activity?
+    var prevStarted = "yes"
+    override fun onResume() {
+        super.onResume()
+        val sharedpreferences =
+            getSharedPreferences(
+                getString(com.alkhatib.namazvakitleri.R.string.app_name),
+                Context.MODE_PRIVATE
+            )
+        if (!sharedpreferences.getBoolean(prevStarted, false)) {
+            val editor = sharedpreferences.edit()
+            editor.putBoolean(prevStarted, Boolean.TRUE)
+            editor.apply()
+        } else {
+            moveToMain()
+        }
+    }
 
+    //switch to main activity
+    fun moveToMain() {
+        // use an intent to travel from one activity to another.
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+//get cities using retrofit and fill the city spinner
     private fun getCity(binding: ActivityLocationBinding, context: Context): Int {
+
+       //declaring variables
         var CityList: ArrayList<City>?
         var cityName: ArrayList<String>?
         var selectedCityId: Int = -1
 
+        //initializing variables
         CityList = ArrayList()
         cityName = ArrayList()
 
-        // on below line we are creating a retrofit
-        // builder and passing our base url
-        // on below line we are creating a retrofit
-        // builder and passing our base url
+        // creating a retrofit builder and passing our base url
         val retrofit = Retrofit.Builder()
             .baseUrl("$website")
 
-            // on below line we are calling add Converter
-            // factory as GSON converter factory.
+            //calling add Converter factory as GSON converter factory.
             // at last we are building our retrofit builder.
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        // below line is to create an instance for our retrofit api class.
+
         // below line is to create an instance for our retrofit api class.
         val retrofitAPI = retrofit.create(RetrofitAPI::class.java)
 
@@ -103,12 +123,13 @@ class LocationActivity : AppCompatActivity() {
 
                     binding.citySpinner.adapter = adapter
 
-                    selectedCityId= CityList!!.get(binding.citySpinner.selectedItemPosition).SehirID!!.toInt()
+                    selectedCityId =
+                        CityList!!.get(binding.citySpinner.selectedItemPosition).SehirID!!.toInt()
 
                     binding.citySpinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
                             override fun onNothingSelected(p0: AdapterView<*>?) {
-                                getDistrict(binding,context,2)
+                                getDistrict(binding, context, 2)
                             }
 
                             override fun onItemSelected(
@@ -119,14 +140,19 @@ class LocationActivity : AppCompatActivity() {
                             ) {
 
 
-                                selectedCityId= CityList?.get(p2)?.SehirID!!.toInt()
-                                getDistrict(binding,context,selectedCityId)
+                                selectedCityId = CityList?.get(p2)?.SehirID!!.toInt()
+
+                                //calling get district to fill the spinner with the correct district
+                                getDistrict(binding, context, selectedCityId)
+
+                                //save city name to shared preferences
                                 val editor = mSharedPreferences.edit()
-                                editor.putString("City",CityList?.get(p2)?.SehirAdi.toString())
+                                editor.putString("City", CityList?.get(p2)?.SehirAdi.toString())
                                 editor.apply()
                             }
                         }
-                }}
+                }
+            }
 
             override fun onFailure(call: Call<ArrayList<City>?>?, t: Throwable?) {
                 // displaying an error message in toast
@@ -136,33 +162,33 @@ class LocationActivity : AppCompatActivity() {
         })
         return selectedCityId
     }
-    private fun getDistrict(binding: ActivityLocationBinding, context: Context,cityId: Int) {
+
+    //get the district data by retrofit and fill the district spinner
+    private fun getDistrict(binding: ActivityLocationBinding, context: Context, cityId: Int) {
+        //declare vars
         var DistrictList: ArrayList<District>?
         var districtName: ArrayList<String>?
 
+        //initialize vars
         DistrictList = ArrayList()
         districtName = ArrayList()
 
-        // on below line we are creating a retrofit
-        // builder and passing our base url
-        // on below line we are creating a retrofit
-        // builder and passing our base url
+
+        // on below line we are creating a retrofit builder and passing our base url
         val retrofit = Retrofit.Builder()
             .baseUrl("$website")
 
-            // on below line we are calling add Converter
-            // factory as GSON converter factory.
+            //  calling add Converter factory as GSON converter factory.
             // at last we are building our retrofit builder.
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         // below line is to create an instance for our retrofit api class.
-        // below line is to create an instance for our retrofit api class.
         val retrofitAPI = retrofit.create(RetrofitAPI::class.java)
 
         val callDistrict: Call<ArrayList<District>?>? = retrofitAPI.getDistrict(cityId)
 
-        // on below line we are making a call.
+        //making a call.
         callDistrict!!.enqueue(object : Callback<ArrayList<District>?> {
             override fun onResponse(
                 call: Call<ArrayList<District>?>?,
@@ -181,15 +207,25 @@ class LocationActivity : AppCompatActivity() {
                         android.R.layout.simple_spinner_item, districtName
                     )
 
+                    //fill spinner with districts names
                     binding.districtSpinner.adapter = adapter
+
+                    //save district name to shared preference
                     val editor = mSharedPreferences.edit()
-                    editor.putString("District",DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceAdi.toString())
-                    editor.putInt("DistrictCode", DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceID!!.toInt())
+                    editor.putString(
+                        "District",
+                        DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceAdi.toString()
+                    )
+                    editor.putInt(
+                        "DistrictCode",
+                        DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceID!!.toInt()
+                    )
                     editor.apply()
 
 
-                }}
-
+                }
+            }
+            //what if retrofit failed?
             override fun onFailure(call: Call<ArrayList<District>?>?, t: Throwable?) {
                 // displaying an error message in toast
                 Toast.makeText(context, "Fail to get the district data", Toast.LENGTH_SHORT)
@@ -197,7 +233,6 @@ class LocationActivity : AppCompatActivity() {
             }
         })
     }
-
 
 
 }

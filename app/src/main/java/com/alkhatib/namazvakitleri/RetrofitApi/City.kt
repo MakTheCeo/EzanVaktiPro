@@ -1,4 +1,4 @@
-package com.alkhatib.namazvakitleri
+package com.alkhatib.namazvakitleri.RetrofitApi
 
 import com.google.gson.annotations.SerializedName
 

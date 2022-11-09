@@ -5,11 +5,11 @@
     android:id="@+id/calenderconstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalenderFragment">
+    tools:context=".Fragments.CalenderFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/calenderRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
