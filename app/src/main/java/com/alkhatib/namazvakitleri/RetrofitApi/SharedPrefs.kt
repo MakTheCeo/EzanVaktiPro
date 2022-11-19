@@ -68,6 +68,10 @@ object SharedPrefs {
         prefsEditor.putFloat(key, value)
         prefsEditor.apply()
     }
+    fun contains(key: String?):Boolean {
+        return mSharedPref!!.contains(key)
+    }
+
 
     //// Clear Preference ////
     fun clearPreference(context: Context?) {

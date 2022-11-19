@@ -3,15 +3,15 @@
     <item
         android:id="@+id/prayers"
         android:icon="@drawable/ic_baseline_access_time_24"
-        android:title="Prayers"  />
+        android:title="Ezan Vakti" />
 
     <item
         android:id="@+id/compass"
         android:icon="@drawable/ic_compass"
-        android:title="Kibla" />
+        android:title="Kıble" />
 
     <item
-    android:id="@+id/calender"
-    android:icon="@drawable/ic_calendar"
-    android:title="Calender" />
+        android:id="@+id/calender"
+        android:icon="@drawable/ic_calendar"
+        android:title="30 Gün" />
 </menu>

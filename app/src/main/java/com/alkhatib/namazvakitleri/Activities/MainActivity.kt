@@ -1,13 +1,14 @@
 package com.alkhatib.namazvakitleri.Activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import com.alkhatib.namazvakitleri.Fragments.CalenderFragment
 import com.alkhatib.namazvakitleri.Fragments.CompassFragment
 import com.alkhatib.namazvakitleri.Fragments.PrayersFragment
 import com.alkhatib.namazvakitleri.R
-import com.alkhatib.namazvakitleri.databinding.ActivityLocationBinding
+import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
@@ -18,7 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         //view binding
         var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
             false
         })
 
+
     }
+
 
     //loading fragment function
     private  fun loadFragment(fragment: Fragment){

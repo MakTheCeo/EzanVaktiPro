@@ -4,6 +4,7 @@
     <color name="lightblue_app">#ACEEFD</color>
     <color name="red_app">#FF1616</color>
     <color name="lightred_app">#F4ACAC</color>
+    <color name="green">#25CC00</color>
 
     <color name="colorPrimary">@color/red_app</color>
     <color name="colorPrimaryDark">@color/lightred_app</color>

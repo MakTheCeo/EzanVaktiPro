@@ -1,19 +1,32 @@
 package com.alkhatib.namazvakitleri.Fragments
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RemoteViews
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import com.alkhatib.namazvakitleri.RetrofitApi.PrayersData
 import com.alkhatib.namazvakitleri.R
+import com.alkhatib.namazvakitleri.RetrofitApi.PrayersData
 import com.alkhatib.namazvakitleri.RetrofitApi.RetrofitAPI
+import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.RetrofitApi.website
 import com.alkhatib.namazvakitleri.databinding.FragmentPrayersBinding
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -23,15 +36,24 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.time.LocalDate
+import java.lang.reflect.Type
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import kotlin.concurrent.fixedRateTimer
 
 
-class PrayersFragment : Fragment() {
+@Suppress("DEPRECATION")
+class PrayersFragment : Fragment(){
 
-    // TODO (STEP 1: Add a variable for SharedPreferences)
-    private lateinit var mSharedPreferences: SharedPreferences
+
+
+    // declaring notification variables
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "i.apps.notifications"
+    private val description = "Test notification"
 
     //declare vars
     private lateinit var binding: FragmentPrayersBinding
@@ -39,21 +61,22 @@ class PrayersFragment : Fragment() {
     private var City: String = ""
     private var District: String = ""
 
-    // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
-    val PREFERENCE_NAME = "LocationPreference"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // TODO (STEP 3: Initialize the SharedPreferences variable.)
-        mSharedPreferences = requireActivity().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+        //initialize shared prefs
+        SharedPrefs.init(requireContext())
 
         //get location from the shared preferences
-        districtId = mSharedPreferences.getInt("DistrictCode", 0)
-        City = mSharedPreferences.getString("City", "")!!
-        District = mSharedPreferences.getString("District", "")!!
+        districtId = SharedPrefs.getInteger("DistrictCode", 0)
+        City = SharedPrefs.getString("City", "")!!
+        District = SharedPrefs.getString("District", "")!!
 
 
-    }
+        }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,11 +85,18 @@ class PrayersFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentPrayersBinding.inflate(layoutInflater)
 
-        //get the prayers data of the month
+
+        //set text
+        binding.locationTv.setText(City + "," + District)
+
+        //calling notification onclicklistener
+        NotificationButtonIsClicked(binding)
+
+        //get the monthly prayers data
         getPrayersData(binding, districtId)
 
+
         //view binding ending
-        binding.locationTv.setText(City + "," + District)
         return binding.root
     }
 
@@ -75,7 +105,9 @@ class PrayersFragment : Fragment() {
 
         //declare and initialize vars
         var PrayersDataList: ArrayList<PrayersData>?
+        var editedPrayersDataList: ArrayList<PrayersData>?
         PrayersDataList = ArrayList()
+        editedPrayersDataList = ArrayList()
 
         //creating a retrofit builder and passing our base url
         val retrofit = Retrofit.Builder()
@@ -91,87 +123,73 @@ class PrayersFragment : Fragment() {
 
         val callPrayersData: Call<ArrayList<PrayersData>?>? = retrofitAPI.getPrayersData(districtId)
 
-        //making a call.
-        callPrayersData!!.enqueue(object : Callback<ArrayList<PrayersData>?> {
-            override fun onResponse(
-                call: Call<ArrayList<PrayersData>?>?,
-                response: Response<ArrayList<PrayersData>?>
-            ) {
-                if (response.isSuccessful()) {
-                    //get the list of the data
-                    PrayersDataList = response.body()!!
-                    var PrayersList = PrayersDataList?.get(0)
+        if (SharedPrefs.contains("prayersDataList") and (1==2))
+        {
+            // creating a variable for gson.
+            val gson = Gson()
 
-                    //find the current day to display its data
-                    var i=0
-                    var status=true
-                    while (status)
-                    {
-                        if(PrayersDataList?.get(i)?.MiladiTarihUzun?.split(" ")
-                                ?.get(0).equals(LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))))
-                        {
-                            PrayersList=PrayersDataList?.get(i)
-                            status=false
-                        }
-                        else
-                        {
-                            i++
-                        }
+            // get to string present from our
+            // shared prefs if not present setting it as null.
+            val json: String = SharedPrefs.getString("prayersDataList", null)!!
+            // get the type of our array list.
+            val type: Type = object : TypeToken<ArrayList<PrayersData?>?>() {}.type
+
+            //getting data from gson
+            // and saving it to our array list
+            PrayersDataList = gson.fromJson<Any>(json, type) as ArrayList<PrayersData>
+        }
+          else {
+            Toast.makeText(context, "Failed to get the prayers data..", Toast.LENGTH_SHORT)
+                .show()
+            callPrayersData!!.enqueue(object : Callback<ArrayList<PrayersData>?> {
+                override fun onResponse(
+                    call: Call<ArrayList<PrayersData>?>?,
+                    response: Response<ArrayList<PrayersData>?>
+                ) {
+
+                    if (response.isSuccessful()) {
+                        //get the list of the data
+                        PrayersDataList = response.body()!!
+                        binding.prayer3.text=PrayersDataList.toString()
                     }
-
-                    //set data to the views
-                    binding.dayTv.setText(
-                        PrayersList?.MiladiTarihUzun?.split(" ")
-                            ?.get(0)
-                    //LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))
-                    )
-                    binding.monthWeekTv.setText(
-                        PrayersList?.MiladiTarihUzun?.split(" ")?.get(1) + ","
-                                + PrayersList?.MiladiTarihUzun?.split(" ")?.get(3)
-                    )
-                    binding.hijriTV.setText(
-                        PrayersList?.HicriTarihKisa?.split(".")?.get(1) + "/" +
-                                PrayersList?.HicriTarihKisa?.split(".")?.get(2)
-                    )
-                    binding.vakit1.text = PrayersList?.Imsak.toString()
-                    binding.vakit2.text = PrayersList?.Gunes.toString()
-                    binding.vakit3.text = PrayersList?.Ogle.toString()
-                    binding.vakit4.text = PrayersList?.Ikindi.toString()
-                    binding.vakit5.text = PrayersList?.Aksam.toString()
-                    binding.vakit6.text = PrayersList?.Yatsi.toString()
-
-
-                    timeLeftTillNextPrayer(binding, PrayersDataList)
-
-
-                    // creating a variable for editor to
-                    // store data in shared preferences.
-                    val editor: SharedPreferences.Editor = mSharedPreferences.edit()
-
-                    // creating a new variable for gson.
-                    val gson = Gson()
-
-                    // getting data from gson and storing it in a string.
-                    val json = gson.toJson(PrayersDataList)
-
-                    //save data in shared
-                    // prefs in the form of string.
-                    editor.putString("prayersDataList", json)
-
-                    // apply changes
-                    // and save data in shared prefs.
-                    editor.apply()
-
                 }
-            }
 
-            override fun onFailure(call: Call<ArrayList<PrayersData>?>?, t: Throwable?) {
-                // displaying an error message in toast
-                Toast.makeText(context, "Failed to get the prayers data..", Toast.LENGTH_SHORT)
-                    .show()
-            }
 
-        })
+                override fun onFailure(call: Call<ArrayList<PrayersData>?>?, t: Throwable?) {
+                    // displaying an error message in toast
+                    Toast.makeText(context, "Failed to get the prayers data..", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+            })
+        }
+    //call function to display time left
+    //timeLeftTillNextPrayer(binding, PrayersDataList)
+
+    editedPrayersDataList=PrayersDataList
+    for (i in 0..editedPrayersDataList!!.size - 1) {
+        editedPrayersDataList?.get(i)?.MiladiTarihUzun =
+            editedPrayersDataList?.get(i)?.MiladiTarihUzun?.split(" ")!!.get(0) + " " +
+                    editedPrayersDataList?.get(i)?.MiladiTarihUzun?.split(" ")!!.get(1)
+    }
+        // store data in shared preferences.
+        // creating a new variable for gson.
+        val gson = Gson()
+
+        // getting data from gson and storing it in a string.
+        var json = gson.toJson(editedPrayersDataList)
+
+        //save data in shared
+        // prefs in the form of string.
+        SharedPrefs.putString("calenderPrayersDataList", json)
+
+
+        // getting data from gson and storing it in a string.
+        json = gson.toJson(PrayersDataList)
+
+        //save data in shared
+        // prefs in the form of string.
+        SharedPrefs.putString("prayersDataList", json)
 
     }
 
@@ -247,5 +265,65 @@ class PrayersFragment : Fragment() {
             }
         }
     }
+
+    //what to do when notification button is clicked
+    fun NotificationButtonIsClicked(binding: FragmentPrayersBinding) {
+       binding.notification1.setOnClickListener{
+           NotificationOnClickManager(binding.notification1)
+           // it is a class to notify the user of events that happen.
+           // This is how you tell the user that something has happened in the
+           // background.
+           notificationManager = requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+
+           // checking if android version is greater than oreo(API 26) or not
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+               notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+               notificationChannel.enableLights(true)
+               notificationChannel.lightColor = Color.GREEN
+               notificationChannel.enableVibration(false)
+               notificationManager.createNotificationChannel(notificationChannel)
+
+               builder = Notification.Builder(requireContext(), channelId)
+                   .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                   .setLargeIcon(BitmapFactory.decodeResource(requireActivity().resources, R.drawable.launch_screen))
+           } else {
+
+               builder = Notification.Builder(requireContext())
+                   .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
+                   .setLargeIcon(BitmapFactory.decodeResource(requireActivity().resources, R.drawable.launch_screen))
+           }
+           notificationManager.notify(1234, builder.build())
+       }
+        binding.notification2.setOnClickListener{
+            NotificationOnClickManager(binding.notification2)
+        }
+        binding.notification3.setOnClickListener{
+            NotificationOnClickManager(binding.notification3)
+        }
+        binding.notification4.setOnClickListener{
+            NotificationOnClickManager(binding.notification4)
+        }
+        binding.notification5.setOnClickListener{
+            NotificationOnClickManager(binding.notification5)
+        }
+        binding.notification6.setOnClickListener{
+            NotificationOnClickManager(binding.notification6)
+        }
+
+    }
+
+        //what to do when notification button is clicked
+        fun NotificationOnClickManager(view: ImageView) {
+        if (view.getDrawable().getConstantState() == getResources().getDrawable( R.drawable.ic_baseline_notifications_active_24).getConstantState())
+        {
+            view.setImageResource(R.drawable.ic_baseline_notifications_off_24)
+        }
+        else
+            view.setImageResource(R.drawable.ic_baseline_notifications_active_24)
+    }
+
+
+
 
 }

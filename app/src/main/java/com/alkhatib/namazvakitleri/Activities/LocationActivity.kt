@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alkhatib.namazvakitleri.RetrofitApi.City
 import com.alkhatib.namazvakitleri.RetrofitApi.District
 import com.alkhatib.namazvakitleri.RetrofitApi.RetrofitAPI
+import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.databinding.ActivityLocationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,11 +25,7 @@ import java.lang.Boolean
 class LocationActivity : AppCompatActivity() {
     val website = "https://ezanvakti.herokuapp.com/"
 
-    // TODO (STEP 1: Add a variable for SharedPreferences)
-    private lateinit var mSharedPreferences: SharedPreferences
 
-    // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
-    val PREFERENCE_NAME = "LocationPreference"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +33,8 @@ class LocationActivity : AppCompatActivity() {
         var binding: ActivityLocationBinding = ActivityLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO (STEP 3: Initialize the SharedPreferences variable.)
-        mSharedPreferences =
-            this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-
+        //initialize shared prefs
+        SharedPrefs.init(this)
 
         // get data from api using retrofit.
         getCity(binding, this)
@@ -47,22 +42,16 @@ class LocationActivity : AppCompatActivity() {
         //switch to main activity from now on.
         binding.nextBtn.setOnClickListener {
             moveToMain()
+
         }
     }
 
     //was it started before as location activity?
-    var prevStarted = "yes"
     override fun onResume() {
         super.onResume()
-        val sharedpreferences =
-            getSharedPreferences(
-                getString(com.alkhatib.namazvakitleri.R.string.app_name),
-                Context.MODE_PRIVATE
-            )
-        if (!sharedpreferences.getBoolean(prevStarted, false)) {
-            val editor = sharedpreferences.edit()
-            editor.putBoolean(prevStarted, Boolean.TRUE)
-            editor.apply()
+
+        if (SharedPrefs.getBoolean("prevStarted", false)) {
+            SharedPrefs.putBoolean("prevStarted", Boolean.TRUE)
         } else {
             moveToMain()
         }
@@ -146,9 +135,9 @@ class LocationActivity : AppCompatActivity() {
                                 getDistrict(binding, context, selectedCityId)
 
                                 //save city name to shared preferences
-                                val editor = mSharedPreferences.edit()
-                                editor.putString("City", CityList?.get(p2)?.SehirAdi.toString())
-                                editor.apply()
+
+                                SharedPrefs.putString("City", CityList?.get(p2)?.SehirAdi.toString())
+
                             }
                         }
                 }
@@ -210,18 +199,26 @@ class LocationActivity : AppCompatActivity() {
                     //fill spinner with districts names
                     binding.districtSpinner.adapter = adapter
 
-                    //save district name to shared preference
-                    val editor = mSharedPreferences.edit()
-                    editor.putString(
-                        "District",
-                        DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceAdi.toString()
-                    )
-                    editor.putInt(
-                        "DistrictCode",
-                        DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceID!!.toInt()
-                    )
-                    editor.apply()
 
+
+                    binding.districtSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                        }
+
+                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                           SharedPrefs.putInteger(
+                                "DistrictCode",
+                                DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceID!!.toInt()
+                            )
+                            SharedPrefs.putString(
+                                "District",
+                                binding.districtSpinner.selectedItem.toString()
+                            )
+
+                        }
+
+                    }
 
                 }
             }
@@ -234,5 +231,9 @@ class LocationActivity : AppCompatActivity() {
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+        finish()
 
+    }
 }
