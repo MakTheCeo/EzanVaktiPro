@@ -1,6 +1,7 @@
 package com.alkhatib.namazvakitleri.Fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +20,17 @@ import java.lang.reflect.Type
 //@AndroidEntryPoint
 class CalenderFragment : Fragment() {
 
+    // TODO (STEP 1: Add a variable for SharedPreferences)
+    private lateinit var mSharedPreferences: SharedPreferences
 
+    // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
+    val PREFERENCE_NAME = "LocationPreference"
 
 
     private lateinit var binding: FragmentCalenderBinding
 
     // DaggerHilt will inject the view-model for us
-   // val viewModel: PrayersDataViewModel by viewModels()
+    // val viewModel: PrayersDataViewModel by viewModels()
 
     //declaring adapter for recycler view
     lateinit var prayersAdapter: PrayersAdapter
@@ -33,10 +38,10 @@ class CalenderFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO (STEP 3: Initialize the SharedPreferences variable.)
+        mSharedPreferences = requireContext().getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
 
-//initialize shared prefs
-        SharedPrefs.init(requireContext())
 
 /*
         val prayersAdapter = PrayersRecyclerAdapter()
@@ -71,7 +76,7 @@ class CalenderFragment : Fragment() {
 
         // get to string present from our
         // shared prefs if not present setting it as null.
-        val json: String = SharedPrefs.getString("calenderPrayersDataList", null)!!
+        val json: String = mSharedPreferences.getString("calenderPrayersDataList", null)!!
         // get the type of our array list.
         val type: Type = object : TypeToken<ArrayList<PrayersData?>?>() {}.type
 

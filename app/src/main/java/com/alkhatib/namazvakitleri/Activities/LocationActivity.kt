@@ -25,7 +25,11 @@ import java.lang.Boolean
 class LocationActivity : AppCompatActivity() {
     val website = "https://ezanvakti.herokuapp.com/"
 
+    // TODO (STEP 1: Add a variable for SharedPreferences)
+    private lateinit var mSharedPreferences: SharedPreferences
 
+    // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
+    val PREFERENCE_NAME = "LocationPreference"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +37,10 @@ class LocationActivity : AppCompatActivity() {
         var binding: ActivityLocationBinding = ActivityLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //initialize shared prefs
-        SharedPrefs.init(this)
+        // TODO (STEP 3: Initialize the SharedPreferences variable.)
+        mSharedPreferences =
+            this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+
 
         // get data from api using retrofit.
         getCity(binding, this)
@@ -42,16 +48,22 @@ class LocationActivity : AppCompatActivity() {
         //switch to main activity from now on.
         binding.nextBtn.setOnClickListener {
             moveToMain()
-
         }
     }
 
     //was it started before as location activity?
+    var prevStarted = "prevStarted"
     override fun onResume() {
         super.onResume()
-
-        if (SharedPrefs.getBoolean("prevStarted", false)) {
-            SharedPrefs.putBoolean("prevStarted", Boolean.TRUE)
+        val sharedpreferences =
+            getSharedPreferences(
+                getString(com.alkhatib.namazvakitleri.R.string.app_name),
+                Context.MODE_PRIVATE
+            )
+        if (!sharedpreferences.getBoolean(prevStarted, false)) {
+            val editor = sharedpreferences.edit()
+            editor.putBoolean(prevStarted, Boolean.TRUE)
+            editor.apply()
         } else {
             moveToMain()
         }
@@ -64,10 +76,10 @@ class LocationActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-//get cities using retrofit and fill the city spinner
+    //get cities using retrofit and fill the city spinner
     private fun getCity(binding: ActivityLocationBinding, context: Context): Int {
 
-       //declaring variables
+        //declaring variables
         var CityList: ArrayList<City>?
         var cityName: ArrayList<String>?
         var selectedCityId: Int = -1
@@ -135,9 +147,9 @@ class LocationActivity : AppCompatActivity() {
                                 getDistrict(binding, context, selectedCityId)
 
                                 //save city name to shared preferences
-
-                                SharedPrefs.putString("City", CityList?.get(p2)?.SehirAdi.toString())
-
+                                val editor = mSharedPreferences.edit()
+                                editor.putString("City", CityList?.get(p2)?.SehirAdi.toString())
+                                editor.apply()
                             }
                         }
                 }
@@ -207,21 +219,21 @@ class LocationActivity : AppCompatActivity() {
                         }
 
                         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                           SharedPrefs.putInteger(
+                            val editor = mSharedPreferences.edit()
+                            editor.putInt(
                                 "DistrictCode",
                                 DistrictList?.get(binding.districtSpinner.selectedItemPosition)?.IlceID!!.toInt()
                             )
-                            SharedPrefs.putString(
+                            editor.putString(
                                 "District",
                                 binding.districtSpinner.selectedItem.toString()
                             )
+                            editor.apply()
 
-                        }
 
-                    }
 
                 }
-            }
+            }}}
             //what if retrofit failed?
             override fun onFailure(call: Call<ArrayList<District>?>?, t: Throwable?) {
                 // displaying an error message in toast

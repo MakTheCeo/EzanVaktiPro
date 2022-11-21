@@ -17,6 +17,7 @@
         android:layout_marginHorizontal="1sp"
         android:layout_weight="1.3"
         android:gravity="left"
+        android:paddingLeft="10dp"
         android:text="Tarih"
         android:textSize="15sp" />
 
