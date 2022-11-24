@@ -105,6 +105,10 @@ class PrayersFragment : Fragment() {
         //calling notification onclicklistener
         NotificationButtonIsClicked(binding)
 
+
+        //display correct notification icon
+        NotificationStatusDisplayer(binding)
+
         //get the monthly prayers data
         getPrayersData(binding, districtId)
 
@@ -270,71 +274,74 @@ class PrayersFragment : Fragment() {
     //what to do when notification button is clicked
     fun NotificationButtonIsClicked(binding: FragmentPrayersBinding) {
         binding.notification1.setOnClickListener {
-            NotificationOnClickManager(binding.notification1)
-            // it is a class to notify the user of events that happen.
-            // This is how you tell the user that something has happened in the
-            // background.
-            notificationManager =
-                requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-
-            // checking if android version is greater than oreo(API 26) or not
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                notificationChannel =
-                    NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
-                notificationChannel.enableLights(true)
-                notificationChannel.lightColor = Color.GREEN
-                notificationChannel.enableVibration(false)
-                notificationManager.createNotificationChannel(notificationChannel)
-
-                builder = Notification.Builder(requireContext(), channelId)
-                    .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-                    .setLargeIcon(
-                        BitmapFactory.decodeResource(
-                            requireActivity().resources,
-                            R.drawable.launch_screen
-                        )
-                    )
-            } else {
-
-                builder = Notification.Builder(requireContext())
-                    .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
-                    .setLargeIcon(
-                        BitmapFactory.decodeResource(
-                            requireActivity().resources,
-                            R.drawable.launch_screen
-                        )
-                    )
-            }
-            notificationManager.notify(1234, builder.build())
+            NotificationStatusManager(binding.notification1)
         }
         binding.notification2.setOnClickListener {
-            NotificationOnClickManager(binding.notification2)
+            NotificationStatusManager(binding.notification2)
         }
         binding.notification3.setOnClickListener {
-            NotificationOnClickManager(binding.notification3)
+            NotificationStatusManager(binding.notification3)
         }
         binding.notification4.setOnClickListener {
-            NotificationOnClickManager(binding.notification4)
+            NotificationStatusManager(binding.notification4)
         }
         binding.notification5.setOnClickListener {
-            NotificationOnClickManager(binding.notification5)
+            NotificationStatusManager(binding.notification5)
         }
         binding.notification6.setOnClickListener {
-            NotificationOnClickManager(binding.notification6)
+            NotificationStatusManager(binding.notification6)
         }
 
     }
 
+    //set icon when fragment is opened
+    fun NotificationStatusDisplayer(binding: FragmentPrayersBinding) {
+
+            NotificationIconSetter(binding.notification1)
+
+            NotificationIconSetter(binding.notification2)
+
+            NotificationIconSetter(binding.notification3)
+
+            NotificationIconSetter(binding.notification4)
+
+            NotificationIconSetter(binding.notification5)
+
+            NotificationIconSetter(binding.notification6)
+
+
+    }
+
     //what to do when notification button is clicked
-    fun NotificationOnClickManager(view: ImageView) {
-        if (view.getDrawable()
-                .getConstantState() == getResources().getDrawable(R.drawable.ic_baseline_notifications_active_24)
-                .getConstantState()
-        ) {
+    fun NotificationStatusManager(view: ImageView) {
+
+        val editor = mSharedPreferences.edit()
+        if (mSharedPreferences.getBoolean("${view.id}",true)) {
+
             view.setImageResource(R.drawable.ic_baseline_notifications_off_24)
+
+            //update shared prefs
+            editor.putBoolean("${view.id}", false)
+
         } else
+        {
             view.setImageResource(R.drawable.ic_baseline_notifications_active_24)
+            //update shared prefs
+            editor.putBoolean("${view.id}",true)
+        }
+        editor.apply()
+    }
+
+    //what to do when notification button is clicked
+    fun NotificationIconSetter(view: ImageView) {
+
+        if (mSharedPreferences.getBoolean("${view.id}",true)) {
+
+            view.setImageResource(R.drawable.ic_baseline_notifications_active_24)
+        } else
+        {
+            view.setImageResource(R.drawable.ic_baseline_notifications_off_24)
+        }
     }
 
     //checking if connected to internet

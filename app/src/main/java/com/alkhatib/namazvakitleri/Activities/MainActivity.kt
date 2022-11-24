@@ -1,5 +1,8 @@
 package com.alkhatib.namazvakitleri.Activities
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -12,16 +15,35 @@ import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import java.lang.Boolean
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
+
+    // TODO (STEP 1: Add a variable for SharedPreferences)
+    private lateinit var mSharedPreferences: SharedPreferences
+
+    // TODO (STEP 2: Add the SharedPreferences name and key name for storing the response data in it.)
+    val PREFERENCE_NAME = "LocationPreference"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //view binding
         var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // TODO (STEP 3: Initialize the SharedPreferences variable.)
+        mSharedPreferences =
+            this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+
+
+        if (!mSharedPreferences.contains("District")) {
+
+
+            moveToLocationActivity()
+        }
+
 
         //default home fragment
         loadFragment(PrayersFragment())
@@ -49,6 +71,12 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+    //switch to Location activity
+    fun moveToLocationActivity() {
+        // use an intent to travel from one activity to another.
+        val intent = Intent(this, LocationActivity::class.java)
+        startActivity(intent)
     }
 
 

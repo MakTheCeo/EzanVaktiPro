@@ -51,23 +51,7 @@ class LocationActivity : AppCompatActivity() {
         }
     }
 
-    //was it started before as location activity?
-    var prevStarted = "prevStarted"
-    override fun onResume() {
-        super.onResume()
-        val sharedpreferences =
-            getSharedPreferences(
-                getString(com.alkhatib.namazvakitleri.R.string.app_name),
-                Context.MODE_PRIVATE
-            )
-        if (!sharedpreferences.getBoolean(prevStarted, false)) {
-            val editor = sharedpreferences.edit()
-            editor.putBoolean(prevStarted, Boolean.TRUE)
-            editor.apply()
-        } else {
-            moveToMain()
-        }
-    }
+
 
     //switch to main activity
     fun moveToMain() {
