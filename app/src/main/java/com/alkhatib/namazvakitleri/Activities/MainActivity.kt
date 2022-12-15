@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
@@ -29,21 +32,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //view binding
-        var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         // TODO (STEP 3: Initialize the SharedPreferences variable.)
         mSharedPreferences =
             this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+        if (mSharedPreferences.contains("District")) {
 
-
-        if (!mSharedPreferences.contains("District")) {
-
-
-            moveToLocationActivity()
-        }
-
+        //view binding
+        var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //default home fragment
         loadFragment(PrayersFragment())
@@ -72,11 +68,31 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    else{
+            moveToLocationActivity()}
+
+    }
+    //inflate menu
+    override fun onCreatePanelMenu(featureId: Int, menu: Menu): kotlin.Boolean {
+    var inflater:MenuInflater=getMenuInflater()
+    inflater.inflate(R.menu.options_menu,menu)
+    return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): kotlin.Boolean {
+        if(item.itemId==R.id.locationMi)
+        {
+        val intent = Intent(this, LocationActivity::class.java)
+            startActivity(intent)
+        }
+        return true
+    }
     //switch to Location activity
     fun moveToLocationActivity() {
         // use an intent to travel from one activity to another.
         val intent = Intent(this, LocationActivity::class.java)
         startActivity(intent)
+
     }
 
 

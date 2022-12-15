@@ -22,6 +22,8 @@ import android.widget.RemoteViews
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
+import com.alkhatib.namazvakitleri.Activities.LocationActivity
+import com.alkhatib.namazvakitleri.Notifications.ConfirmationDialog
 import com.alkhatib.namazvakitleri.R
 import com.alkhatib.namazvakitleri.RetrofitApi.PrayersData
 import com.alkhatib.namazvakitleri.RetrofitApi.RetrofitAPI
@@ -98,8 +100,19 @@ class PrayersFragment : Fragment() {
         binding = FragmentPrayersBinding.inflate(layoutInflater)
 
 
-        //set text
-        binding.locationTv.setText(City + "," + District)
+      if(City.equals(District)) {
+            //set only City
+            binding.locationTv.setText(City)
+        }
+        else {
+            //set text
+            binding.locationTv.setText(City + "\n" + District)
+        }
+        binding.locationTv.setOnClickListener{
+            val intent = Intent(requireContext(), LocationActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         //calling notification onclicklistener
@@ -165,7 +178,7 @@ class PrayersFragment : Fragment() {
                 //LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))
             )
             binding.monthWeekTv.setText(
-                PrayersList?.MiladiTarihUzun?.split(" ")?.get(1) + ","
+                PrayersList?.MiladiTarihUzun?.split(" ")?.get(1) + ",\n"
                         + PrayersList?.MiladiTarihUzun?.split(" ")?.get(3)
             )
             binding.hijriTV.setText(
@@ -273,6 +286,8 @@ class PrayersFragment : Fragment() {
 
     //what to do when notification button is clicked
     fun NotificationButtonIsClicked(binding: FragmentPrayersBinding) {
+
+
         binding.notification1.setOnClickListener {
             NotificationStatusManager(binding.notification1)
         }
@@ -315,21 +330,22 @@ class PrayersFragment : Fragment() {
     //what to do when notification button is clicked
     fun NotificationStatusManager(view: ImageView) {
 
-        val editor = mSharedPreferences.edit()
-        if (mSharedPreferences.getBoolean("${view.id}",true)) {
-
-            view.setImageResource(R.drawable.ic_baseline_notifications_off_24)
-
-            //update shared prefs
-            editor.putBoolean("${view.id}", false)
-
-        } else
+        if (mSharedPreferences.getBoolean("${view.id}",true))
         {
-            view.setImageResource(R.drawable.ic_baseline_notifications_active_24)
-            //update shared prefs
-            editor.putBoolean("${view.id}",true)
-        }
-        editor.apply()
+            ConfirmationDialog(requireContext()).show(
+                getString(R.string.alert_title),
+                getString(R.string.are_you_sure_turnoff),view
+            ) {
+
+              }}
+        else
+        {        ConfirmationDialog(requireContext()).show(
+            getString(R.string.alert_title),
+            getString(R.string.are_you_sure_turnon),view
+        ) {
+
+        }}
+
     }
 
     //what to do when notification button is clicked
@@ -421,7 +437,7 @@ class PrayersFragment : Fragment() {
                         LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))
                     )
                     binding.monthWeekTv.setText(
-                        PrayersList?.MiladiTarihUzun?.split(" ")?.get(1) + ","
+                        PrayersList?.MiladiTarihUzun?.split(" ")?.get(1) + "\n"
                                 + PrayersList?.MiladiTarihUzun?.split(" ")?.get(3)
                     )
                     binding.hijriTV.setText(

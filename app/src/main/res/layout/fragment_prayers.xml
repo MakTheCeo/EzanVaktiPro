@@ -11,13 +11,16 @@
     <TextView
         android:id="@+id/locationAndDateContainerTv"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
         android:layout_marginHorizontal="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/prayer_background_red"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
 
     <TextView
         android:id="@+id/hijriTV"
@@ -53,8 +56,9 @@
         style="@style/prayerTableTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:gravity="left"
         android:text="Eylül,Salı"
         android:textColor="@color/white"
@@ -62,7 +66,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/locationAndDateContainerTv"
         app:layout_constraintStart_toEndOf="@+id/dayTv"
         app:layout_constraintTop_toBottomOf="@+id/locationTv"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintVertical_bias="0.71000004" />
 
     <TextView
         android:id="@+id/locationTv"
@@ -70,6 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:gravity="right"
         android:text="Ankara,Çankaya"
         android:textColor="@color/white"
         android:textSize="24sp"
@@ -83,9 +88,12 @@
         android:layout_marginHorizontal="25dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/prayer_background_red"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.68"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locationAndDateContainerTv" />
+        app:layout_constraintTop_toBottomOf="@+id/locationAndDateContainerTv"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/timeLeftForNextPrayerTv"
@@ -119,7 +127,7 @@
         android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

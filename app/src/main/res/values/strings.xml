@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Namaz Vakitleri</string>
+    <string name="app_name">Ezan Vakti Pro</string>
+    <string name="app_name_splash_screen">Ezan Vakti\nPro</string>
     <string name="app_version">App version 3.0</string>
     <string name="fajr">İmsak</string>
     <string name="sunrise">Güneş</string>
@@ -9,4 +10,7 @@
     <string name="ishaa">Yatsı</string>
     <string name="prayer_default">00:00</string>
     <string name="settings">Settings</string>
+    <string name="alert_title">Lütfen Onaylayın</string>
+    <string name="are_you_sure_turnoff">Bildirimleri kapatmak istediğinizden emin misiniz?</string>
+    <string name="are_you_sure_turnon">Bildirimleri açmak istediğinizden emin misiniz?</string>
 </resources>
