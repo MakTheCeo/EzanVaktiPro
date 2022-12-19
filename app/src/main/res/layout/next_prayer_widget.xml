@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nextPrayerWidget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/AppTheme.AppWidgetContainer">
+
+    <TextView
+        android:id="@+id/nextPrayerContainerTv3"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:background="@drawable/prayer_background_red" />
+
+    <ImageView
+        android:id="@+id/nextPrayerIv3"
+        android:layout_width="72dp"
+        android:layout_height="62dp"
+        android:layout_alignTop="@id/nextPrayerContainerTv3"
+        android:layout_alignRight="@id/nextPrayerContainerTv3"
+        android:layout_marginVertical="22dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/prayer2_white" />
+
+    <TextView
+        android:id="@+id/timeLeftForNextPrayerTv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nextPrayerContainerTv3"
+        android:layout_alignBottom="@id/nextPrayerContainerTv3"
+        android:layout_centerVertical="false"
+        android:layout_marginLeft="14dp"
+        android:layout_marginBottom="5dp"
+        android:text="01:43:25"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/nextPrayerTv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/nextPrayerContainerTv3"
+        android:layout_alignTop="@id/nextPrayerContainerTv3"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/dhuhr"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+</RelativeLayout>

@@ -23,6 +23,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.alkhatib.namazvakitleri.Activities.LocationActivity
+import com.alkhatib.namazvakitleri.Fragments.PrayersFragment.ConnectivityUtils.isOnline
 import com.alkhatib.namazvakitleri.Notifications.ConfirmationDialog
 import com.alkhatib.namazvakitleri.R
 import com.alkhatib.namazvakitleri.RetrofitApi.PrayersData
@@ -109,8 +110,16 @@ class PrayersFragment : Fragment() {
             binding.locationTv.setText(City + "\n" + District)
         }
         binding.locationTv.setOnClickListener{
-            val intent = Intent(requireContext(), LocationActivity::class.java)
-            startActivity(intent)
+            if( isOnline(requireContext()))
+            {
+
+                val intent = Intent(requireContext(), LocationActivity::class.java)
+                startActivity(intent)
+            }
+            else{
+                Toast.makeText(requireContext(), "İnternet bağlantısı yok", Toast.LENGTH_SHORT)
+                    .show()
+            }
         }
 
 
@@ -138,7 +147,6 @@ class PrayersFragment : Fragment() {
 
         if (mSharedPreferences.contains("PrayersDataList")) {
 
-            // creating a variable for gson.
             // creating a variable for gson.
             val gson = Gson()
 
@@ -196,7 +204,7 @@ class PrayersFragment : Fragment() {
             //call function to display time left
             timeLeftTillNextPrayer(binding, PrayersDataList)
 
-            if ((PrayersDataList?.get(15)?.MiladiTarihUzun?.split(" ")
+            if ((PrayersDataList?.get(3)?.MiladiTarihUzun?.split(" ")
                     ?.get(0)?.toInt()!! <= LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))
                     .toInt()) and isOnline(requireContext())
             ) {
@@ -359,9 +367,9 @@ class PrayersFragment : Fragment() {
             view.setImageResource(R.drawable.ic_baseline_notifications_off_24)
         }
     }
-
+    object ConnectivityUtils {
     //checking if connected to internet
-    fun isOnline(context: Context): Boolean {
+     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
@@ -381,7 +389,7 @@ class PrayersFragment : Fragment() {
             }
         }
         return false
-    }
+    }}
 
     fun retrofitGetPrayersData(binding: FragmentPrayersBinding, districtId: Int) {
 

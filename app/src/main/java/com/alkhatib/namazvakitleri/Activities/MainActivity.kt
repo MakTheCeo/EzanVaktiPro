@@ -3,7 +3,6 @@ package com.alkhatib.namazvakitleri.Activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,11 +17,21 @@ import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import java.lang.Boolean
+import android.app.*
+import com.alkhatib.namazvakitleri.Notifications.channelID
+import com.alkhatib.namazvakitleri.Notifications.messageExtra
+import com.alkhatib.namazvakitleri.Notifications.notificationID
+import com.alkhatib.namazvakitleri.Notifications.titleExtra
+import java.util.*
+import android.os.Bundle
+import android.widget.Toast
+import com.alkhatib.namazvakitleri.Fragments.PrayersFragment.ConnectivityUtils.isOnline
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     lateinit var bottomNav : BottomNavigationView
+    //view binding
 
     // TODO (STEP 1: Add a variable for SharedPreferences)
     private lateinit var mSharedPreferences: SharedPreferences
@@ -37,10 +46,15 @@ class MainActivity : AppCompatActivity() {
             this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         if (mSharedPreferences.contains("District")) {
 
-        //view binding
-        var binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+            binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //notifications
+          /*  createNotificationChannel()
+            binding.submitButton.setOnClickListener{
+                scheduleNotification()
+            }
+*/
         //default home fragment
         loadFragment(PrayersFragment())
 
@@ -80,10 +94,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): kotlin.Boolean {
-        if(item.itemId==R.id.locationMi)
+
+        if(item.itemId==R.id.locationMi && isOnline(this))
         {
+
         val intent = Intent(this, LocationActivity::class.java)
             startActivity(intent)
+        }
+        else{
+            Toast.makeText(this, "İnternet bağlantısı yok", Toast.LENGTH_SHORT)
+                .show()
         }
         return true
     }
@@ -104,4 +124,70 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    //schedule a notification
+   /* private fun scheduleNotification()
+    {
+        val intent = Intent(applicationContext, Notification::class.java)
+        val title = "Ezan vakti pro"
+        val message = "Akşam"
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext,
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getTime()
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            time,
+            pendingIntent
+        )
+        showAlert(time, title, message)
+    }
+
+    private fun showAlert(time: Long, title: String, message: String)
+    {
+        val date = Date(time)
+        val dateFormat = android.text.format.DateFormat.getLongDateFormat(applicationContext)
+        val timeFormat = android.text.format.DateFormat.getTimeFormat(applicationContext)
+
+        AlertDialog.Builder(this)
+            .setTitle("Notification Scheduled")
+            .setMessage(
+                "Title: " + title +
+                        "\nMessage: " + message +
+                        "\nAt: " + dateFormat.format(date) + " " + timeFormat.format(date))
+            .setPositiveButton("Okay"){_,_ ->}
+            .show()
+    }
+
+    private fun getTime(): Long
+    {
+        val minute = binding.timePicker.minute
+        val hour = binding.timePicker.hour
+        val day = binding.datePicker.dayOfMonth
+        val month = binding.datePicker.month
+        val year = binding.datePicker.year
+
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day, hour, minute)
+        return calendar.timeInMillis
+    }
+
+    private fun createNotificationChannel()
+    {
+        val name = "Notif Channel"
+        val desc = "A Description of the Channel"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name, importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
+*/
 }

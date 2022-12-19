@@ -5,13 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView11"
+    <Button
+        android:id="@+id/submitButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="249dp"
-        android:text="TextView"
+        android:layout_gravity="center"
+        android:layout_marginTop="65dp"
+        android:text="schedule"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timePicker2"
+        app:layout_constraintVertical_bias="0.144" />
+
+    <DatePicker
+        android:id="@+id/datePicker2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TimePicker
+        android:id="@+id/timePicker2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="43dp"
+        android:layout_weight="1"
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:timePickerMode="spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

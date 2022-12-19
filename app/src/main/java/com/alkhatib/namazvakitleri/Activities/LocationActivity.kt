@@ -48,6 +48,16 @@ class LocationActivity : AppCompatActivity() {
         //switch to main activity from now on.
         binding.nextBtn.setOnClickListener {
             moveToMain()
+
+            if (mSharedPreferences.contains("PrayersDataList"))
+            {
+            val editor = mSharedPreferences.edit()
+
+            editor.remove(
+                "PrayersDataList",
+
+            )
+            editor.apply()}
         }
     }
 

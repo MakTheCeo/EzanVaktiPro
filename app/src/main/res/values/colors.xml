@@ -10,7 +10,7 @@
     <color name="colorPrimaryDark">@color/lightred_app</color>
     <color name="colorAccent">@color/blue_app</color>
     <color name="scrim">#33000000</color>
-<color name="black">#000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
     <color name="divider">#4D888383</color>
@@ -27,5 +27,9 @@
     <color name="active">#38B6FF</color>
 
     <color name="grey">#ff303030</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
 
 </resources>

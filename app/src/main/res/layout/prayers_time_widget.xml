@@ -1,0 +1,281 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/prayersTimeWidget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme.AppWidgetContainer">
+
+    <TableLayout
+        android:id="@+id/prayTable"
+        android:layout_width="422dp"
+        android:layout_height="wrap_content"
+    >
+
+        <TableRow
+            android:id="@+id/TitlesTR"
+            android:layout_width="192dp"
+            android:layout_height="179dp"
+            android:background="@drawable/prayer_background_blue"
+            android:textAlignment="center"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/namazTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:layout_weight="0.35"
+                android:fontFamily="@font/qs_bold"
+                android:gravity="center"
+                android:text="Namaz"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/timeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:layout_weight="0.4"
+                android:fontFamily="@font/qs_bold"
+                android:gravity="center"
+                android:text="Vakit"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/notificationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="3dp"
+                android:layout_weight="0.25"
+                android:fontFamily="@font/qs_bold"
+                android:gravity="center"
+                android:text="Bildirim"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/fajrTR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer1"
+
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/fajr"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit1"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <ImageView
+                android:id="@+id/notification1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/sunriseTR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer2"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/sunrise"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit2"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <ImageView
+                android:id="@+id/notification2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/DuhrTR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer3"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/dhuhr"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit3"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <ImageView
+                android:id="@+id/notification3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/asrTR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer4"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/asr"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit4"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+            <ImageView
+                android:id="@+id/notification4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/maghrebTR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer5"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/maghreb"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit5"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+            <ImageView
+                android:id="@+id/notification5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/ishaaTR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/prayer6"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
+                android:text="@string/ishaa"
+                android:textSize="@dimen/prayers_textsize" />
+
+
+            <TextView
+                android:id="@+id/vakit6"
+                style="@style/prayerTableTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="@string/prayer_default"
+                android:textSize="@dimen/prayers_textsize" />
+
+            <ImageView
+                android:id="@+id/notification6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:src="@drawable/ic_baseline_notifications_active_24" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.alkhatib.namazvakitleri.Fragments.PrayersFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
