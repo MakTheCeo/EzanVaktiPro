@@ -12,4 +12,4 @@ I hope you will enjoy it and benefit from it :)
 You can use any part of my code for any good purpose ;)
 
 #follow me on linkedin:
-https://www.linkedin.com/company/mandosoft
+https://linkedin.com/in/mohamadalkhatib
