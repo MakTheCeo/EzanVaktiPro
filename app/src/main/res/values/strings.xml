@@ -4,6 +4,7 @@
     <string name="app_version">App version 3.0</string>
     <string name="fajr">İmsak</string>
     <string name="sunrise">Güneş</string>
+
     <string name="dhuhr">Öğle</string>
     <string name="asr">İkindi</string>
     <string name="maghreb">Akşam</string>
