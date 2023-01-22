@@ -3,12 +3,15 @@ package com.alkhatib.namazvakitleri.Activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import com.alkhatib.namazvakitleri.MainActivity
 import com.alkhatib.namazvakitleri.RetrofitApi.City
 import com.alkhatib.namazvakitleri.RetrofitApi.District
 import com.alkhatib.namazvakitleri.RetrofitApi.RetrofitAPI
@@ -41,23 +44,56 @@ class LocationActivity : AppCompatActivity() {
         mSharedPreferences =
             this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
+        binding.checkboxTextTV.setOnClickListener{
+                var gourl= Intent(Intent.ACTION_VIEW, Uri.parse("https://www.freeprivacypolicy.com/live/121ad82e-acbd-49f6-a3c7-cd317816039b"))
+                startActivity(gourl)
+        }
+        if (mSharedPreferences.contains("Executed") )
+        {
+            binding.checkBox.visibility = View.GONE
+            binding.warningTV.visibility = View.GONE
+            binding.checkboxTextTV.visibility = View.GONE
+        }
 
         // get data from api using retrofit.
         getCity(binding, this)
 
+
         //switch to main activity from now on.
         binding.nextBtn.setOnClickListener {
-            moveToMain()
 
-            if (mSharedPreferences.contains("PrayersDataList"))
+            if (binding.checkBox.isChecked or !binding.checkBox.isVisible) {
+
+                moveToMain()
+                if (!mSharedPreferences.contains("Executed"))
+                {
+                    val editor = mSharedPreferences.edit()
+
+                    editor.putBoolean(
+                        "Executed",
+                        true
+                        )
+                    editor.apply()
+                }
+
+            }
+            else if (!binding.warningTV.isVisible){
+                binding.warningTV.visibility = View.VISIBLE
+            }
+
+            //reset location
+            if (mSharedPreferences.contains("PrayersDataList") )
             {
+
             val editor = mSharedPreferences.edit()
 
             editor.remove(
                 "PrayersDataList",
 
             )
-            editor.apply()}
+            editor.apply()
+            }
+
         }
     }
 

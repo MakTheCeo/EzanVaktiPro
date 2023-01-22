@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.alkhatib.namazvakitleri.MainActivity
 import com.alkhatib.namazvakitleri.R
 
 @Suppress("DEPRECATION")

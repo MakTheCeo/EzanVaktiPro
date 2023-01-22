@@ -4,7 +4,6 @@
     <string name="app_version">App version 3.0</string>
     <string name="fajr">İmsak</string>
     <string name="sunrise">Güneş</string>
-
     <string name="dhuhr">Öğle</string>
     <string name="asr">İkindi</string>
     <string name="maghreb">Akşam</string>
@@ -17,4 +16,6 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="agreement"><u>Gizlilik politikasını</u> okudum ve kabul ediyorum</string>
+    <string name="check_the_checkbox">* Lütfen aşağıdaki kutuyu işaretleyin</string>
 </resources>

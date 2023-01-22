@@ -3,7 +3,7 @@
     <color name="blue_app">#38B6FF</color>
     <color name="lightblue_app">#ACEEFD</color>
     <color name="red_app">#FF1616</color>
-    <color name="lightred_app">#F4ACAC</color>
+    <color name="lightred_app">#D12323</color>
     <color name="green">#25CC00</color>
 
     <color name="colorPrimary">@color/red_app</color>

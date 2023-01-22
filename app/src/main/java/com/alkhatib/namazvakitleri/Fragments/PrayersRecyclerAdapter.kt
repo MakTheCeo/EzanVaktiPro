@@ -2,6 +2,7 @@ package com.alkhatib.namazvakitleri.Fragments
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -39,10 +40,14 @@ class PrayersAdapter(private val prayersList: ArrayList<PrayersData>) : Recycler
 
 
 
-                if (prayersData.MiladiTarihUzun?.split(" ")
+       /*         if (prayersData.MiladiTarihUzun?.split(" ")
                         ?.get(0).equals(LocalDate.now().format(DateTimeFormatter.ofPattern("dd")))
                 )
-                    itemBinding.apply { recyclerItem.setBackgroundColor(R.color.lightblue_app) }
+                {   itemBinding.apply { recyclerItem.setBackgroundColor(R.color.lightblue_app) }
+
+            }*/
+
+
 
                 itemBinding.apply {
                     dateTv.text = prayersData.MiladiTarihUzun

@@ -1,4 +1,4 @@
-package com.alkhatib.namazvakitleri.Notifications
+package com.alkhatib.namazvakitleri
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver
@@ -17,7 +17,7 @@ class Notification : BroadcastReceiver()
     override fun onReceive(context: Context, intent: Intent)
     {
         val notification = NotificationCompat.Builder(context, channelID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_baseline_notifications_active_24)
             .setContentTitle(intent.getStringExtra(titleExtra))
             .setContentText(intent.getStringExtra(messageExtra))
             .build()

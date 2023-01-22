@@ -1,31 +1,32 @@
-package com.alkhatib.namazvakitleri.Activities
+package com.alkhatib.namazvakitleri
 
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
+import com.alkhatib.namazvakitleri.Activities.LocationActivity
 import com.alkhatib.namazvakitleri.Fragments.CalenderFragment
 import com.alkhatib.namazvakitleri.Fragments.CompassFragment
 import com.alkhatib.namazvakitleri.Fragments.PrayersFragment
+import com.alkhatib.namazvakitleri.Fragments.PrayersFragment.ConnectivityUtils.isOnline
+import com.alkhatib.namazvakitleri.channelID
+import com.alkhatib.namazvakitleri.messageExtra
+import com.alkhatib.namazvakitleri.notificationID
+import com.alkhatib.namazvakitleri.titleExtra
 import com.alkhatib.namazvakitleri.R
-import com.alkhatib.namazvakitleri.RetrofitApi.SharedPrefs
 import com.alkhatib.namazvakitleri.databinding.ActivityMainBinding
+import com.alkhatib.namazvakitleri.databinding.TestingBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import android.app.*
-import com.alkhatib.namazvakitleri.Notifications.channelID
-import com.alkhatib.namazvakitleri.Notifications.messageExtra
-import com.alkhatib.namazvakitleri.Notifications.notificationID
-import com.alkhatib.namazvakitleri.Notifications.titleExtra
 import java.util.*
-import android.os.Bundle
-import android.widget.Toast
-import com.alkhatib.namazvakitleri.Fragments.PrayersFragment.ConnectivityUtils.isOnline
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -44,22 +45,20 @@ class MainActivity : AppCompatActivity() {
         // TODO (STEP 3: Initialize the SharedPreferences variable.)
         mSharedPreferences =
             this.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-        if (mSharedPreferences.contains("District")) {
+        if (mSharedPreferences.contains("District") and mSharedPreferences.contains("Executed")) {
 
             binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //notifications
-          /*  createNotificationChannel()
-            binding.submitButton.setOnClickListener{
-                scheduleNotification()
-            }
-*/
-        //default home fragment
+      //notifications
+          createNotificationChannel()
+
+
+    //default home fragment
         loadFragment(PrayersFragment())
 
         //assigning value to bottom nav
-        bottomNav = binding.bottomNav as BottomNavigationView
+      bottomNav = binding.bottomNav as BottomNavigationView
 
         //loading the fragment based on navigation bar clicks...
         bottomNav.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
@@ -83,7 +82,8 @@ class MainActivity : AppCompatActivity() {
 
     }
     else{
-            moveToLocationActivity()}
+            moveToLocationActivity()
+    }
 
     }
     //inflate menu
@@ -101,10 +101,18 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, LocationActivity::class.java)
             startActivity(intent)
         }
+        else if(item.itemId==R.id.privacyPolicyMi&& isOnline(this)){
+
+                var gourl= Intent(Intent.ACTION_VIEW, Uri.parse("https://www.freeprivacypolicy.com/live/121ad82e-acbd-49f6-a3c7-cd317816039b"))
+                startActivity(gourl)
+
+        }
         else{
             Toast.makeText(this, "İnternet bağlantısı yok", Toast.LENGTH_SHORT)
                 .show()
         }
+
+
         return true
     }
     //switch to Location activity
@@ -125,13 +133,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     //schedule a notification
-   /* private fun scheduleNotification()
+    private fun scheduleNotification(title: String,message: String)
     {
         val intent = Intent(applicationContext, Notification::class.java)
-        val title = "Ezan vakti pro"
-        val message = "Akşam"
+        val title = "Yatsı"
+        val message = "Yatsı "
         intent.putExtra(titleExtra, title)
-        intent.putExtra(messageExtra, message)
+        intent.putExtra(messageExtra, message+" namazı 5 dakika sonradır")
 
         val pendingIntent = PendingIntent.getBroadcast(
             applicationContext,
@@ -168,11 +176,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getTime(): Long
     {
-        val minute = binding.timePicker.minute
-        val hour = binding.timePicker.hour
-        val day = binding.datePicker.dayOfMonth
-        val month = binding.datePicker.month
-        val year = binding.datePicker.year
+        val minute = 17
+        val hour =19
+        val day = 27
+        val month =11
+        val year = 2022
 
         val calendar = Calendar.getInstance()
         calendar.set(year, month, day, hour, minute)
@@ -181,13 +189,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun createNotificationChannel()
     {
-        val name = "Notif Channel"
-        val desc = "A Description of the Channel"
+        val name = "Namaz Bildirimi"
+        val desc = "Ezan Vakti Bildirimi"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(channelID, name, importance)
         channel.description = desc
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
-*/
+
+
+    //when back btn pressed
+
+    override fun onBackPressed() {
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(a)
+    }
 }
