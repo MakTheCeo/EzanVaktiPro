@@ -65,6 +65,7 @@ private fun initData(){
         binding.compassIv.startAnimation(rotateAnimation)
 
         binding.deviation.text=(currentDegree-164).toString()+"°"
+
         if(currentDegree-164>3)
             binding.arrowDirectionIv.setImageResource(R.drawable.ic_baseline_arrow_back_24)
         else if(currentDegree-164<-3)

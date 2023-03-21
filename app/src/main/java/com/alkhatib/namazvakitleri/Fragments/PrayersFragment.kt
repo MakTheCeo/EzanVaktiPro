@@ -202,7 +202,7 @@ class PrayersFragment : Fragment() {
 
 
             //call function to display time left
-            timeLeftTillNextPrayer(binding, PrayersDataList)
+            timeLeftTillNextPrayer(binding, PrayersList)
 
             if ((PrayersDataList?.get(3)?.MiladiTarihUzun?.split(" ")
                     ?.get(0)?.toInt()!! <= LocalDate.now().format(DateTimeFormatter.ofPattern("dd"))
@@ -220,10 +220,10 @@ class PrayersFragment : Fragment() {
     //how much time left till the Ezan?
     fun timeLeftTillNextPrayer(
         binding: FragmentPrayersBinding,
-        PrayersDataList: ArrayList<PrayersData>?
+        PrayersList: PrayersData?
     ) {
         //declare vars
-        var PrayersList = PrayersDataList?.get(3)
+
 
         //setting up the scope
         val scope = MainScope() // could also use an other scope such as viewModelScope
@@ -461,7 +461,7 @@ class PrayersFragment : Fragment() {
 
 
                     //call function to display time left
-                    timeLeftTillNextPrayer(binding, PrayersDataList)
+                    timeLeftTillNextPrayer(binding, PrayersList)
 
                     // store data in shared preferences.
                     // creating a new variable for gson.

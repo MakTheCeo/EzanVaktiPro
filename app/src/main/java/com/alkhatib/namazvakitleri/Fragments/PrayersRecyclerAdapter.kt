@@ -40,14 +40,6 @@ class PrayersAdapter(private val prayersList: ArrayList<PrayersData>) : Recycler
 
 
 
-       /*         if (prayersData.MiladiTarihUzun?.split(" ")
-                        ?.get(0).equals(LocalDate.now().format(DateTimeFormatter.ofPattern("dd")))
-                )
-                {   itemBinding.apply { recyclerItem.setBackgroundColor(R.color.lightblue_app) }
-
-            }*/
-
-
 
                 itemBinding.apply {
                     dateTv.text = prayersData.MiladiTarihUzun

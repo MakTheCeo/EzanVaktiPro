@@ -60,6 +60,10 @@ dependencies {
     //viewModels()
     implementation ("androidx.fragment:fragment-ktx:1.5.4")
 
+    //notifications
+    implementation 'androidx.hilt:hilt-work:1.0.0'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
 
 
 //room database
